@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youm-e-Takbeer: Pakistan's Nuclear Sovereignty Day</title>
+    <meta name="description" content="Commemorating Pakistan's historic nuclear tests on May 28, 1998 that established the nation as a nuclear power">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --primary-dark: #01411C;       /* Pakistan Green */
+            --primary-light: #E8F5E9;      /* Light Green */
+            --secondary-dark: #0D47A1;     /* Deep Blue */
+            --secondary-light: #E3F2FD;    /* Light Blue */
+            --accent-gold: #FFD700;        /* Gold */
+            --accent-orange: #FF6D00;      /* Vibrant Orange */
+            --neutral-dark: #212121;       /* Dark Gray */
+            --neutral-light: #FAFAFA;      /* Light Gray */
+            --white: #FFFFFF;
+            --black: #000000;
+            --section-padding: 6rem 2rem;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--neutral-dark);
+            line-height: 1.7;
+            background-color: var(--neutral-light);
+            overflow-x: hidden;
+            counter-reset: section;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ===== Utility Classes ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-dark);
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-title::before {
+            counter-increment: section;
+            content: "0" counter(section) ".";
+            position: absolute;
+            left: 0;
+            top: -30px;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-orange));
+            margin: 1.5rem auto 0;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 1s ease-out 0.3s;
+        }
+
+        .section-title.visible::after {
+            transform: scaleX(1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--box-shadow);
+            min-height: 50px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-orange));
+            z-index: -1;
+            transition: width 0.5s ease;
+        }
+
+        .btn:hover {
+            color: var(--neutral-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn-glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: skewY(0deg);
+            }
+            50% {
+                transform: skewY(2deg);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ===== Hero Section ===== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            color: var(--white);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease-out 0.5s forwards;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, var(--accent-gold), var(--white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content .subheading {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .typewriter {
+            border-right: 3px solid var(--accent-gold);
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0 auto;
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            max-width: fit-content;
+            padding-right: 5px;
+            margin-bottom: 2rem;
+        }
+
+        /* Pakistani Flag Animation */
+        .flag-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 48px;
+            z-index: 10;
+            opacity: 0.9;
+        }
+
+        .pakistan-flag {
+            width: 100%;
+            height: 100%;
+            animation: wave 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+        }
+
+        /* ===== Features Section ===== */
+        #features {
+            background-color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--neutral-light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .feature-card-header {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-card-header img {
+            transform: scale(1.1);
+        }
+
+        .feature-card-body {
+            padding: 2rem;
+        }
+
+        .feature-card-title {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feature-card-desc {
+            color: var(--neutral-dark);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        /* ===== Timeline Section ===== */
+        #timeline {
+            background-color: var(--primary-light);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary-dark), var(--accent-orange));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(1, 65, 28, 0.3);
+        }
+
+        .timeline-item {
+            padding: 15px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: var(--transition);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            transform: translateX(-30px);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent-gold);
+            border: 3px solid var(--primary-dark);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -15px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -15px;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-dark), var(--accent-gold));
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--neutral-dark);
+        }
+
+        .timeline-desc {
+            font-size: 1rem;
+            color: var(--neutral-dark);
+        }
+
+        .timeline-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+            transition: transform 0.5s ease;
+        }
+
+        .timeline-item:hover .timeline-image {
+            transform: scale(1.03);
+        }
+
+        /* 3D Nuclear Symbol */
+        .nuclear-symbol-container {
+            width: 100%;
+            height: 450px;
+            margin: 3rem auto;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease, transform 1s ease;
+            background-color: var(--neutral-dark);
+        }
+
+        .nuclear-symbol-container.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== Celebration Section ===== */
+        #celebration {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #celebration-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .celebration-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .celebration-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background-color: var(--neutral-dark);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 1200px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .subheading {
+                font-size: 1.3rem;
+            }
+
+            .typewriter {
+                font-size: 1.2rem;
+            }
+
+            .feature-card-title {
+                font-size: 1.5rem;
+            }
+
+            .feature-card-desc {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 5rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .section-title::before {
+                top: -25px;
+                font-size: 1.3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content .subheading {
+                font-size: 1.2rem;
+            }
+
+            .typewriter {
+                font-size: 1.1rem;
+                white-space: normal;
+                border-right: none;
+            }
+
+            .flag-container {
+                width: 70px;
+                height: 42px;
+            }
+
+            .timeline-container::before {
+                left: 25px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 15px;
+                left: 0 !important;
+                transform: translateX(-30px) !important;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 15px !important;
+                width: 20px;
+                height: 20px;
+            }
+
+            .timeline-content {
+                padding: 20px;
+            }
+
+            .timeline-title {
+                font-size: 1.3rem;
+            }
+
+            .timeline-desc {
+                font-size: 0.95rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .feature-card-header {
+                height: 180px;
+            }
+
+            .nuclear-symbol-container {
+                height: 350px;
+            }
+
+            .celebration-content p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --section-padding: 4rem 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .section-title::before {
+                font-size: 1.1rem;
+                top: -20px;
+            }
+
+            .section-title::after {
+                width: 80px;
+                height: 3px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content .subheading {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .flag-container {
+                width: 60px;
+                height: 36px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .feature-card-header {
+                height: 160px;
+            }
+
+            .feature-card-body {
+                padding: 1.5rem;
+            }
+
+            .feature-card-title {
+                font-size: 1.4rem;
+            }
+
+            .feature-card-desc {
+                font-size: 0.9rem;
+            }
+
+            .timeline-container {
+                padding: 3rem 0;
+            }
+
+            .timeline-container::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+                padding-right: 10px;
+            }
+
+            .timeline-item::after {
+                left: 12px !important;
+                width: 18px;
+                height: 18px;
+            }
+
+            .timeline-content {
+                padding: 15px;
+            }
+
+            .timeline-title {
+                font-size: 1.2rem;
+            }
+
+            .timeline-desc {
+                font-size: 0.9rem;
+            }
+
+            .nuclear-symbol-container {
+                height: 280px;
+                margin: 2rem auto;
+            }
+
+            .celebration-content p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="hero-overlay"></div>
+        <video class="hero-video" autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-background-with-moving-lines-1761-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="flag-container">
+            <svg class="pakistan-flag" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                <rect width="900" height="600" fill="#01411C"/>
+                <rect width="225" height="600" fill="#FFFFFF"/>
+                <circle cx="562.5" cy="300" r="150" fill="#FFFFFF"/>
+                <path d="M562.5 300l46.06-141.42 127.28 92.71-76.54 125.27-125.27-76.54 28.47 139.98z" fill="#01411C"/>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <h1>Youm-e-Takbeer: Pakistan's Nuclear Sovereignty</h1>
+            <p class="subheading">May 28, 1998 - A Historic Milestone of National Pride</p>
+            <div class="typewriter" id="typewriter-text"></div>
+            <button id="enter-exhibit" class="btn floating">Explore Our Journey</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Pillars of Strength</h2>
+            <div class="features-grid">
+                <!-- Feature cards will be added via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Nuclear Journey</h2>
+            <div class="timeline-container">
+                <!-- Timeline items will be added via JS -->
+            </div>
+            <!-- 3D Nuclear Symbol -->
+            <div class="nuclear-symbol-container" id="nuclear-symbol">
+                <!-- Three.js will render here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Celebration Section -->
+    <section id="celebration" class="section">
+        <canvas id="celebration-canvas"></canvas>
+        <div class="container celebration-content">
+            <h2 class="section-title" style="color: var(--white);">Celebrate Youm-e-Takbeer</h2>
+            <p>
+                On May 28, 1998, Pakistan established its nuclear capability, ensuring peace through strength. 
+                Join us in celebrating this historic achievement of national pride and technological excellence.
+            </p>
+            <button id="celebration-btn" class="btn btn-glow">Ignite Celebration</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <svg class="footer-logo" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                <rect width="900" height="600" fill="#01411C"/>
+                <rect width="225" height="600" fill="#FFFFFF"/>
+                <circle cx="562.5" cy="300" r="150" fill="#FFFFFF"/>
+                <path d="M562.5 300l46.06-141.42 127.28 92.71-76.54 125.27-125.27-76.54 28.47 139.98z" fill="#01411C"/>
+            </svg>
+            <div class="footer-links">
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">History</a>
+                <a href="#" class="footer-link">Gallery</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            <p class="copyright">© 2023 Youm-e-Takbeer Commemoration. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typewriter Effect
+            const typewriterText = document.getElementById('typewriter-text');
+            const quotes = [
+                "\"The day Pakistan became the first nuclear power in the Islamic world.\"",
+                "\"A testament to our scientific and technological capabilities.\"",
+                "\"May 28, 1998 - A day of national pride and sovereignty.\""
+            ];
+            let currentQuote = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 100;
+
+            function typeWriter() {
+                const currentText = quotes[currentQuote];
+                
+                if (isDeleting) {
+                    typewriterText.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    typingSpeed = 50;
+                } else {
+                    typewriterText.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    typingSpeed = 100;
+                }
+
+                if (!isDeleting && charIndex === currentText.length) {
+                    isDeleting = true;
+                    typingSpeed = 1500;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    currentQuote = (currentQuote + 1) % quotes.length;
+                    typingSpeed = 500;
+                }
+
+                setTimeout(typeWriter, typingSpeed);
+            }
+
+            setTimeout(typeWriter, 1000);
+
+            // Smooth scroll to exhibit
+            document.getElementById('enter-exhibit').addEventListener('click', function() {
+                document.querySelector('#features').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+
+            // Features Data and Rendering
+            const featuresData = [
+                {
+                    title: "Scientific Excellence",
+                    description: "Pakistan's nuclear program showcased world-class scientific research and technological innovation under challenging circumstances.",
+                    image: "images/exellence.jpeg"
+                },
+                {
+                    title: "National Unity",
+                    description: "The entire nation stood united behind this strategic program, demonstrating remarkable resilience and determination.",
+                    image: "images/unity.jpeg"
+                },
+                {
+                    title: "Strategic Deterrence",
+                    description: "The nuclear capability established credible minimum deterrence, ensuring Pakistan's security and sovereignty.",
+                    image: "images/download (3).jpeg"
+                }
+            ];
+
+            const featuresGrid = document.querySelector('.features-grid');
+            featuresData.forEach(item => {
+                const featureCard = document.createElement('div');
+                featureCard.className = 'feature-card';
+                featureCard.innerHTML = `
+                    <div class="feature-card-header">
+                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    </div>
+                    <div class="feature-card-body">
+                        <h3 class="feature-card-title">${item.title}</h3>
+                        <p class="feature-card-desc">${item.description}</p>
+                    </div>
+                `;
+                featuresGrid.appendChild(featureCard);
+            });
+
+            // Timeline Data and Rendering
+            const timelineData = [
+                {
+                    year: "1972",
+                    title: "Program Initiation",
+                    description: "Pakistan's nuclear program was formally launched in response to regional security challenges, with Zulfikar Ali Bhutto famously declaring \"We will eat grass, even go hungry, but we will get one of our own.\"",
+                    image: "images/download.jpeg"
+                },
+                {
+                    year: "1974",
+                    title: "Critical Response",
+                    description: "Following India's nuclear test in 1974 (codenamed \"Smiling Buddha\"), Pakistan accelerated its nuclear program to maintain strategic balance in the region.",
+                    image: "images/Swarna___2023_05_17T155545_486.avif"
+                },
+                {
+                    year: "1998",
+                    title: "Chagai-I Tests",
+                    description: "On May 28, 1998, Pakistan conducted five successful nuclear tests in the Chagai district of Balochistan, codenamed \"Chagai-I\", in response to India's nuclear tests earlier that month.",
+                    image: "images/download (1).jpeg"
+                },
+                {
+                    year: "1998",
+                    title: "Chagai-II Test",
+                    description: "On May 30, 1998, Pakistan conducted an additional test in the Kharan Desert, codenamed \"Chagai-II\", further confirming its nuclear capabilities.",
+                    image: "cha3_lrg.jpg"
+                },
+                {
+                    year: "1998",
+                    title: "Global Recognition",
+                    description: "These tests made Pakistan the seventh nuclear power in the world and the first in the Islamic world, establishing credible minimum deterrence.",
+                    image: "images/download (3).png"
+                },
+                {
+                    year: "Present",
+                    title: "Responsible Nuclear Power",
+                    description: "Pakistan maintains a responsible nuclear posture with robust command and control systems, and advocates for strategic stability in South Asia.",
+                    image: "images/download (2).jpeg"
+                }
+            ];
+
+            const timelineContainer = document.querySelector('.timeline-container');
+            timelineData.forEach((item, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <div class="timeline-year">${item.year}</div>
+                        <h3 class="timeline-title">${item.title}</h3>
+                        <p class="timeline-desc">${item.description}</p>
+                        <img src="${item.image}" alt="${item.title}" class="timeline-image" loading="lazy">
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+
+            // Intersection Observer for Animations
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-title').forEach(title => {
+                observer.observe(title);
+            });
+
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+
+            const nuclearSymbolContainer = document.querySelector('.nuclear-symbol-container');
+            observer.observe(nuclearSymbolContainer);
+
+            // 3D Nuclear Symbol with Three.js
+            const nuclearSymbol = document.getElementById('nuclear-symbol');
+            if (nuclearSymbol) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, nuclearSymbol.offsetWidth / nuclearSymbol.offsetHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(nuclearSymbol.offsetWidth, nuclearSymbol.offsetHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                nuclearSymbol.appendChild(renderer.domElement);
+
+                // Nucleus
+                const nucleusGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+                const nucleusMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0xFFD700, 
+                    emissive: 0xFFD700, 
+                    emissiveIntensity: 0.5,
+                    specular: 0xFFFFFF,
+                    shininess: 30
+                });
+                const nucleus = new THREE.Mesh(nucleusGeometry, nucleusMaterial);
+                scene.add(nucleus);
+
+                // Electrons
+                const electronGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+                const electronMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0xFF6D00, 
+                    emissive: 0xFF6D00, 
+                    emissiveIntensity: 0.7,
+                    specular: 0xFFFFFF,
+                    shininess: 50
+                });
+                const electrons = [];
+                
+                // Create three electron orbitals
+                for (let i = 0; i < 3; i++) {
+                    const electron = new THREE.Mesh(electronGeometry, electronMaterial);
+                    electron.position.set(
+                        Math.cos(i * 2 * Math.PI / 3) * 1.5,
+                        0,
+                        Math.sin(i * 2 * Math.PI / 3) * 1.5
+                    );
+                    scene.add(electron);
+                    electrons.push(electron);
+                }
+
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040);
+                scene.add(ambientLight);
+                
+                const pointLight = new THREE.PointLight(0xFFFFFF, 1, 100);
+                pointLight.position.set(5, 5, 5);
+                scene.add(pointLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8);
+                directionalLight.position.set(1, 1, 1);
+                scene.add(directionalLight);
+
+                camera.position.z = 5;
+
+                // Animation
+                let time = 0;
+                function animateNuclearSymbol() {
+                    requestAnimationFrame(animateNuclearSymbol);
+                    time += 0.02;
+                    
+                    // Rotate nucleus
+                    nucleus.rotation.y += 0.005;
+                    
+                    // Animate electrons in orbits
+                    electrons.forEach((electron, i) => {
+                        const orbitRadius = 1.5 + Math.sin(time * 0.5 + i) * 0.2;
+                        electron.position.x = Math.cos(time + i * 2 * Math.PI / 3) * orbitRadius;
+                        electron.position.z = Math.sin(time + i * 2 * Math.PI / 3) * orbitRadius;
+                        electron.position.y = Math.sin(time * 2 + i) * 0.5;
+                        
+                        // Pulsing effect
+                        electron.scale.setScalar(1 + 0.1 * Math.sin(time * 3 + i));
+                    });
+                    
+                    renderer.render(scene, camera);
+                }
+                animateNuclearSymbol();
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    camera.aspect = nuclearSymbol.offsetWidth / nuclearSymbol.offsetHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(nuclearSymbol.offsetWidth, nuclearSymbol.offsetHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                });
+            }
+
+            // Celebration Particle and Confetti Effect
+            const celebrationBtn = document.getElementById('celebration-btn');
+            const celebrationCanvas = document.getElementById('celebration-canvas');
+            
+            if (celebrationBtn && celebrationCanvas) {
+                celebrationCanvas.width = window.innerWidth;
+                celebrationCanvas.height = window.innerHeight;
+                
+                const ctx = celebrationCanvas.getContext('2d');
+                let bursts = [];
+                let particles = [];
+                let confetti = [];
+                
+                class Burst {
+                    constructor() {
+                        this.x = Math.random() * celebrationCanvas.width;
+                        this.y = celebrationCanvas.height * 0.2 + Math.random() * celebrationCanvas.height * 0.6;
+                        this.radius = 2;
+                        this.color = `hsl(${Math.random() * 30 + 20}, 100%, 50%)`;
+                        this.exploded = false;
+                    }
+                    
+                    update() {
+                        if (!this.exploded) {
+                            this.radius += 0.2;
+                            if (this.radius >= 10) {
+                                this.explode();
+                            }
+                        }
+                    }
+                    
+                    explode() {
+                        this.exploded = true;
+                        const particleCount = window.innerWidth <= 400 ? 30 : 50;
+                        for (let i = 0; i < particleCount; i++) {
+                            particles.push(new Particle(
+                                this.x,
+                                this.y,
+                                this.color
+                            ));
+                        }
+                    }
+                    
+                    draw() {
+                        if (!this.exploded) {
+                            ctx.beginPath();
+                            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                            ctx.fillStyle = this.color;
+                            ctx.fill();
+                            
+                            // Glow effect
+                            const gradient = ctx.createRadialGradient(
+                                this.x, this.y, 0,
+                                this.x, this.y, this.radius * 2
+                            );
+                            gradient.addColorStop(0, this.color);
+                            gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                            
+                            ctx.beginPath();
+                            ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
+                            ctx.fillStyle = gradient;
+                            ctx.fill();
+                        }
+                    }
+                }
+                
+                class Particle {
+                    constructor(x, y, color) {
+                        this.x = x;
+                        this.y = y;
+                        this.color = color;
+                        this.radius = Math.random() * 2 + 1;
+                        this.velocity = {
+                            x: (Math.random() - 0.5) * 8,
+                            y: (Math.random() - 0.5) * 8
+                        };
+                        this.alpha = 1;
+                        this.decay = Math.random() * 0.02 + 0.01;
+                    }
+                    
+                    update() {
+                        this.velocity.y += 0.05; // Gravity
+                        this.x += this.velocity.x;
+                        this.y += this.velocity.y;
+                        this.alpha -= this.decay;
+                    }
+                    
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        
+                        // Particle glow
+                        const gradient = ctx.createRadialGradient(
+                            this.x, this.y, 0,
+                            this.x, this.y, this.radius * 2
+                        );
+                        gradient.addColorStop(0, this.color);
+                        gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                        
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
+                        ctx.fillStyle = gradient;
+                        ctx.fill();
+                        
+                        // Particle core
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                        
+                        ctx.restore();
+                    }
+                }
+                
+                class Confetti {
+                    constructor() {
+                        this.x = Math.random() * celebrationCanvas.width;
+                        this.y = -20;
+                        this.size = Math.random() * 20 + 10;
+                        this.velocityY = Math.random() * 4 + 2;
+                        this.velocityX = (Math.random() - 0.5) * 2;
+                        this.rotation = Math.random() * 360;
+                        this.spin = (Math.random() - 0.5) * 4;
+                        this.color = Math.random() > 0.5 ? '#01411C' : '#FFFFFF';
+                        this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+                        this.alpha = 1;
+                    }
+                    
+                    update() {
+                        this.y += this.velocityY;
+                        this.x += this.velocityX;
+                        this.rotation += this.spin;
+                    }
+                    
+                    draw() {
+                        ctx.save();
+                        ctx.translate(this.x, this.y);
+                        ctx.rotate(this.rotation * Math.PI / 180);
+                        ctx.fillStyle = this.color;
+                        
+                        if (this.shape === 'rect') {
+                            // Rectangle confetti
+                            ctx.fillRect(-this.size/2, -this.size/4, this.size, this.size/2);
+                        } else {
+                            // Circle confetti
+                            ctx.beginPath();
+                            ctx.arc(0, 0, this.size/2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                        
+                        ctx.restore();
+                    }
+                }
+
+                function animateCelebration() {
+                    requestAnimationFrame(animateCelebration);
+                    
+                    // Clear with semi-transparent background for trail effect
+                    ctx.fillStyle = 'rgba(1, 65, 28, 0.1)';
+                    ctx.fillRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
+                    
+                    // Update and draw bursts
+                    bursts.forEach((burst, index) => {
+                        burst.update();
+                        burst.draw();
+                        if (burst.exploded) {
+                            bursts.splice(index, 1);
+                        }
+                    });
+                    
+                    // Update and draw particles
+                    particles.forEach((particle, index) => {
+                        particle.update();
+                        particle.draw();
+                        if (particle.alpha <= 0) {
+                            particles.splice(index, 1);
+                        }
+                    });
+                    
+                    // Update and draw confetti
+                    confetti.forEach((c, index) => {
+                        c.update();
+                        c.draw();
+                        if (c.y > celebrationCanvas.height) {
+                            confetti.splice(index, 1);
+                        }
+                    });
+                }
+                
+                animateCelebration();
+                
+                celebrationBtn.addEventListener('click', () => {
+                    // Create firework bursts
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            bursts.push(new Burst());
+                        }, i * 200);
+                    }
+                    
+                    // Create falling confetti
+                    const confettiCount = window.innerWidth <= 400 ? 30 : 50;
+                    for (let i = 0; i < confettiCount; i++) {
+                        setTimeout(() => {
+                            confetti.push(new Confetti());
+                        }, i * 100);
+                    }
+                    
+                    // Play celebration sound
+                    const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+                    audio.volume = 0.3;
+                    audio.play().catch(e => console.log("Audio play failed:", e));
+                });
+                
+                window.addEventListener('resize', () => {
+                    celebrationCanvas.width = window.innerWidth;
+                    celebrationCanvas.height = window.innerHeight;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
